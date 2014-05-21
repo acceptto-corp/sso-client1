@@ -1,0 +1,15 @@
+defaults: &defaults
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: acceptto
+  password: vesper
+
+development:
+  <<: *defaults
+  database: sso_client
+
+test:
+  <<: *defaults
+  database: sso_client

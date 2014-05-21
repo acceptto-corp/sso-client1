@@ -1,0 +1,6 @@
+<p>
+	Current Logged In User: <%= @user %> | <a href="/logout">Sign Out</a>
+</p>
+<p>
+	User Extra Attributes: <%= request.session['cas']['extra_attributes'] %>
+</p>
