@@ -9,7 +9,11 @@ defaults: &defaults
 development:
   <<: *defaults
   database: sso_client
+  
+production:
+  <<: *defaults
+  database: sso_client_production
 
 test:
   <<: *defaults
-  database: sso_client
+  database: sso_client_test

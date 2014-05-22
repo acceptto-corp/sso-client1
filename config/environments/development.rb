@@ -26,4 +26,9 @@ AccepttoSsoClient::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  
+  config.rack_cas.server_url = 'http://localhost:3000/'
+  
+  require 'rack-cas/session_store/active_record'
+  config.rack_cas.session_store = RackCAS::ActiveRecordStore
 end

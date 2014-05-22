@@ -19,10 +19,5 @@ module AccepttoSsoClient
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    
-    config.rack_cas.server_url = 'http://ancient-headland-5266.herokuapp.com/'
-    
-    require 'rack-cas/session_store/active_record'
-    config.rack_cas.session_store = RackCAS::ActiveRecordStore
   end
 end
