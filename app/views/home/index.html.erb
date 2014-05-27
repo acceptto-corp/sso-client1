@@ -1,6 +1,6 @@
 <h2>Sample Client 1</h2>
 <p>
-	Current Logged In User: <%= @user %> | <a href="/logout">Sign Out</a>
+	Current Logged In User: <%= @user %> | <a href="/logout?service=<%= Rails.application.config.host_url %>">Sign Out</a>
 </p>
 <p>
 	User Extra Attributes: <%= request.session['cas']['extra_attributes'] %>

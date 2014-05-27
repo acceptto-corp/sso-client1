@@ -78,7 +78,8 @@ AccepttoSsoClient::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   
-  config.rack_cas.server_url = 'http://acceptto-cas.herokuapp.com/'
+  config.rack_cas.server_url = 'http://m2m.acceptto.net/cass/'
+  config.host_url = 'http://acceptto-client1.herokuapp.com'
   
   require 'rack-cas/session_store/active_record'
   config.rack_cas.session_store = RackCAS::ActiveRecordStore
