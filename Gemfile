@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'rack-cas'
 
+gem 'omniauth', '~> 1.2.1'
+gem 'omniauth-google-oauth2', '~> 0.2.4'
 gem 'omniauth-facebook', :branch => '1-6-stable'
 
 group :doc do
