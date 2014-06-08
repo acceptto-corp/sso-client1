@@ -1,12 +1,19 @@
 class HomeController < ApplicationController
   
-  skip_before_filter :check_cas_login, :only => :public
-  
-  def public
+  def index
+    if request.session['cas'].nil? || request.session['cas']['user'].nil?
+      @user = nil
+    else
+      @user = request.session['cas']['user']
+    end
   end
   
-  def index
-    @user = request.session['cas']['user']
+  def login
+    if request.session['cas'].nil? || request.session['cas']['user'].nil?
+      return render :file => "#{Rails.root}/public/401.html", :status => 401, :layout => false
+    else
+      redirect_to '/index'
+    end
   end
   
   def logout
