@@ -1,3 +1,9 @@
+<meta name="google-signin-clientid" content="817466244424-tud4v2q9nikoso5d6engqmo2414h1lbt.apps.googleusercontent.com" />
+<meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
+<meta name="google-signin-requestvisibleactions" content="http://schemas.google.com/AddActivity" />
+<meta name="google-signin-cookiepolicy" content="single_host_origin" />
+<meta name="google-signin-callback" content="signinCallback" />
+
 <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -9,16 +15,18 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
+      document.getElementById('fbLogin').style.display = 'none';
+      document.getElementById('facebook_logout').style.display = 'inline';
       testAPI();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
+      document.getElementById('fbLogin').style.display = 'block';
+      document.getElementById('status').innerHTML = 'Not signed into facebook. ';
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
+      document.getElementById('status').innerHTML = 'Not signed into facebook. ';
+      document.getElementById('fbLogin').style.display = 'block';
     }
   }
 
@@ -32,30 +40,28 @@
   }
 
   window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '657108284383054',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.0' // use version 2.0
-  });
-
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
+	  FB.init({
+	    appId      : '657108284383054',
+	    cookie     : true,  // enable cookies to allow the server to access 
+	                        // the session
+	    xfbml      : true,  // parse social plugins on this page
+	    version    : 'v2.0' // use version 2.0
+	  });
+	
+	  // Now that we've initialized the JavaScript SDK, we call 
+	  // FB.getLoginStatus().  This function gets the state of the
+	  // person visiting this page and can return one of three states to
+	  // the callback you provide.  They can be:
+	  //
+	  // 1. Logged into your app ('connected')
+	  // 2. Logged into Facebook, but not your app ('not_authorized')
+	  // 3. Not logged into Facebook and can't tell if they are logged into
+	  //    your app or not.
+	  //
+	  // These three cases are handled in the callback function.
+	  FB.getLoginStatus(function(response) {
+	    statusChangeCallback(response);
+	  });
   };
 
   // Load the SDK asynchronously
@@ -77,6 +83,16 @@
         'Thanks for logging in, ' + response.name + '!';
     });
   }
+  
+  function logout() {
+  	FB.logout(function(response) {
+  		document.getElementById('status').innerHTML = 'You signed out of facebook. ';
+  		document.getElementById('facebook_logout').style.display = 'none';
+  		document.getElementById('fbLogin').style.display = 'block';
+	});
+  }
+  
+  checkLoginState();
 </script>
 
 <h2>Sample Client 1</h2>
@@ -88,21 +104,96 @@
 		</a>
 	</p>
 	
-	<hr />
-	
-	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-	</fb:login-button>
-	
-	<div id="status">
-	</div>
-	
 <% else %>
-
 	<p>
+		<h3>Acceptto Login Status:</h3>
 		Current Logged In User: <%= @user %> | <a href="/logout?service=<%= Rails.application.config.host_url %>">Sign Out</a>
-	</p>
-	<p>
-		User Extra Attributes: <%= request.session['cas']['extra_attributes'] %>
+		<br />
+		<!--User Extra Attributes: <%= request.session['cas']['extra_attributes'] %>-->
 	</p>
 	
 <% end %>
+
+<hr />
+
+<p>
+	<h3>Facebook Login Status:</h3> 
+	<span id="status">...</span>
+	<span id="facebook_logout" style='display:none;'>
+		<a onclick="javascript:logout()" href="#">
+			| Facebook Logout
+		</a>
+	</span>
+</p>
+
+<div id="fbLogin" style='display:none;'>
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+		</fb:login-button>
+</div>
+
+<hr />
+
+<p>
+	<h3>Google Login Status:</h3> 
+	<span id="google_status">
+	</span>
+	<button id="signinButton" style='display: none;'>Sign in with Google</button>
+</p>
+
+
+<script type="text/javascript">
+(function() {
+   var po = document.createElement('script');
+   po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/client:plusone.js?onload=render';
+   var s = document.getElementsByTagName('script')[0];
+   s.parentNode.insertBefore(po, s);
+ })();
+
+     
+function render() {
+   // Additional params including the callback, the rest of the params will
+   // come from the page-level configuration.
+   var additionalParams = {
+     'callback': signinCallback
+   };
+
+   // Attach a click listener to a button to trigger the flow.
+   var signinButton = document.getElementById('signinButton');
+   signinButton.addEventListener('click', function() {
+     gapi.auth.signIn(additionalParams); // Will use page level configuration
+   });
+}
+ 
+function signinCallback(authResult) {
+  if (authResult['status']['signed_in']) {
+    // Update the app to reflect a signed in user
+    // Hide the sign-in button now that the user is authorized, for example:
+    document.getElementById('signinButton').setAttribute('style', 'display: none');
+    document.getElementById('google_status').innerHTML = authResult['access_token'];
+    getCurrentUser();
+  } else {
+    // Update the app to reflect a signed out user
+    // Possible error values:
+    //   "user_signed_out" - User is signed-out
+    //   "access_denied" - User denied access to your app
+    //   "immediate_failed" - Could not automatically log in the user
+    document.getElementById('google_status').innerHTML = authResult['error']
+    document.getElementById('signinButton').setAttribute('style', 'display: block');
+  }
+}
+
+function getCurrentUser() {
+	// var request = gapi.client.plus.people.list({
+		   // 'userId': 'me',
+		   // 'collection': 'visible'
+	// });
+// 	
+	// request.execute(function(resp) {
+		// console.log('Num people visible:' + resp.totalItems);
+	// });
+}
+
+</script>
+
+

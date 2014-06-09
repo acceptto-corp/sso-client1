@@ -153,9 +153,9 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
-  omniauth
+  omniauth (~> 1.2.1)
   omniauth-facebook
-  omniauth-google-oauth2
+  omniauth-google-oauth2 (~> 0.2.4)
   pg
   rack-cas
   rails (= 4.1)
