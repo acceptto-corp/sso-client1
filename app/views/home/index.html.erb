@@ -1,6 +1,6 @@
 <meta name="google-signin-clientid" content="817466244424-tud4v2q9nikoso5d6engqmo2414h1lbt.apps.googleusercontent.com" />
+<!-- <meta name="google-signin-scope" content="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&state=/profile" /> -->
 <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
-<meta name="google-signin-requestvisibleactions" content="http://schemas.google.com/AddActivity" />
 <meta name="google-signin-cookiepolicy" content="single_host_origin" />
 <meta name="google-signin-callback" content="signinCallback" />
 
@@ -137,63 +137,108 @@
 	<h3>Google Login Status:</h3> 
 	<span id="google_status">
 	</span>
-	<button id="signinButton" style='display: none;'>Sign in with Google</button>
+	<div id='google_signed_in' style='display:none'>
+		<table>
+			<tr>
+				<td>
+					<span id='pic'></span>
+				</td>
+				<td>
+					<span id='name'></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br />
+	<br />
+	<button id="signinButton" style='display:none;'>Sign in with Google</button>
+	<button id="signoutButton" onclick='javascript:signOut();
+' style='display:none'>Sign out of Google</button>
+<br />
+<br />
 </p>
 
+<script src="https://apis.google.com/js/client:plusone.js?onload=render"></script>
 
 <script type="text/javascript">
-(function() {
-   var po = document.createElement('script');
-   po.type = 'text/javascript'; po.async = true;
-   po.src = 'https://apis.google.com/js/client:plusone.js?onload=render';
-   var s = document.getElementsByTagName('script')[0];
-   s.parentNode.insertBefore(po, s);
- })();
-
-     
-function render() {
-   // Additional params including the callback, the rest of the params will
-   // come from the page-level configuration.
-   var additionalParams = {
-     'callback': signinCallback
-   };
-
-   // Attach a click listener to a button to trigger the flow.
-   var signinButton = document.getElementById('signinButton');
-   signinButton.addEventListener('click', function() {
-     gapi.auth.signIn(additionalParams); // Will use page level configuration
-   });
-}
- 
-function signinCallback(authResult) {
-  if (authResult['status']['signed_in']) {
-    // Update the app to reflect a signed in user
-    // Hide the sign-in button now that the user is authorized, for example:
-    document.getElementById('signinButton').setAttribute('style', 'display: none');
-    document.getElementById('google_status').innerHTML = authResult['access_token'];
-    getCurrentUser();
-  } else {
-    // Update the app to reflect a signed out user
-    // Possible error values:
-    //   "user_signed_out" - User is signed-out
-    //   "access_denied" - User denied access to your app
-    //   "immediate_failed" - Could not automatically log in the user
-    document.getElementById('google_status').innerHTML = authResult['error']
-    document.getElementById('signinButton').setAttribute('style', 'display: block');
+	(function() {
+	   var po = document.createElement('script');
+	   po.type = 'text/javascript'; po.async = true;
+	   po.src = 'https://apis.google.com/js/client:plusone.js?onload=render';
+	   var s = document.getElementsByTagName('script')[0];
+	   s.parentNode.insertBefore(po, s);
+	 })();
+	 
+	function render() {
+	   // Additional params including the callback, the rest of the params will
+	   // come from the page-level configuration.
+	   var additionalParams = {
+	     'callback': signinCallback
+	   };
+	
+	   // Attach a click listener to a button to trigger the flow.
+	   var signinButton = document.getElementById('signinButton');
+	   signinButton.addEventListener('click', function() {
+	     gapi.auth.signIn(additionalParams); // Will use page level configuration
+	   });
+	
+	}
+	
+	function signinCallback(authResult) {
+	  console.log('Google authResult: ');
+	  console.log(authResult);
+	  if (authResult['status']['signed_in']) {
+	    // Update the app to reflect a signed in user
+	    // Hide the sign-in button now that the user is authorized, for example:
+	    document.getElementById('signinButton').setAttribute('style', 'display: none');
+	    document.getElementById('signoutButton').setAttribute('style', 'display: block');
+	    //document.getElementById('google_status').innerHTML = authResult['access_token'];
+	    gapi.client.load('plus','v1', loadProfile);
+	  } else {
+	    if (authResult['error'] == "user_signed_out") {
+	    		document.getElementById('google_status').innerHTML = 'User Is Signed Out!';
+	    	}
+	    	else if 	(authResult['error'] == "access_denied") {
+	    		document.getElementById('google_status').innerHTML = 'User denied access to your app!';
+	    	}
+	    	else if 	(authResult['error'] == "immediate_failed") {
+	    		document.getElementById('google_status').innerHTML = 'Could not automatically log in the user!';
+	    	}
+	    	
+	    document.getElementById('signinButton').setAttribute('style', 'display: block');
+	    document.getElementById('signoutButton').setAttribute('style', 'display: none');
+	    document.getElementById('google_signed_in').setAttribute('style', 'display: none');
+	  }
+	}
+	
+	function signOut() {
+		gapi.auth.signOut();
+		document.getElementById('signinButton').setAttribute('style', 'display: block');
+	}
+	
+	/**
+   * Uses the JavaScript API to request the user's profile, which includes
+   * their basic information. When the plus.profile.emails.read scope is
+   * requested, the response will also include the user's primary email address
+   * and any other email addresses that the user made public.
+   */
+  function loadProfile(){
+    var request = gapi.client.plus.people.get( {'userId' : 'me'} );
+    request.execute(loadProfileCallback);
   }
-}
 
-function getCurrentUser() {
-	// var request = gapi.client.plus.people.list({
-		   // 'userId': 'me',
-		   // 'collection': 'visible'
-	// });
-// 	
-	// request.execute(function(resp) {
-		// console.log('Num people visible:' + resp.totalItems);
-	// });
-}
+  /**
+   * Callback for the asynchronous request to the people.get method. The profile
+   * and email are set to global variables. Triggers the user's basic profile
+   * to display when called.
+   */
+  function loadProfileCallback(obj) {
+    profile = obj;
+    console.log("Google Profile Retrieved:")
+	console.log(obj)
+    document.getElementById('name').innerHTML = profile['displayName'];
+    document.getElementById('pic').innerHTML = '<img src="' + profile['image']['url'] + '" />';
+    document.getElementById('google_signed_in').setAttribute('style', 'display: block');
+  }
 
 </script>
-
-
