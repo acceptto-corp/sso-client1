@@ -192,7 +192,7 @@
 	    // Hide the sign-in button now that the user is authorized, for example:
 	    document.getElementById('signinButton').setAttribute('style', 'display: none');
 	    document.getElementById('signoutButton').setAttribute('style', 'display: block');
-	    //document.getElementById('google_status').innerHTML = authResult['access_token'];
+	    document.getElementById('google_status').innerHTML = '';
 	    gapi.client.load('plus','v1', loadProfile);
 	  } else {
 	    if (authResult['error'] == "user_signed_out") {
