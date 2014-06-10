@@ -80,3 +80,11 @@
     width:25px;
     height:25px;
 }
+.acceptto-panel,.google-panel,.facebook-panel{
+    margin-top:5px;
+    padding:20px;
+    }
+
+.acceptto-panel a{
+    color:green;
+}
