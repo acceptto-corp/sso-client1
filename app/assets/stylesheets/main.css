@@ -1,38 +1,15 @@
-
-.form-signin {
-    max-width: 400px;
-    display:block;
-    background-color: #f7f7f7;
-    -moz-box-shadow: 0 0 3px 3px #888;
-    -webkit-box-shadow: 0 0 3px 3px #888;
-    box-shadow: 0 0 3px 3px #888;
-    border-radius:2px;
-    margin:30px auto;
-}
-.main{
-    padding: 38px;
-}
-.social-box{
-    margin: 0 auto;
-    padding: 38px;
-    border-bottom:1px #ccc solid;
-}
-.social-box a{
-    font-weight:bold;
-    font-size:18px;
-    padding:8px;
-}
-.social-box a i{
-    font-weight:bold;
-    font-size:20px;
-}
+.nav { padding-top: 0px !important; padding-bottom: 0px !important; }
+.navbar { padding-top: 15px; padding-bottom: 0px !important;margin-bottom: 0px !important; background: #eee !important; }
+.navbar-static-top { background: #333 !important; }
+.navbar-brand { padding-top: 0px; margin-right: 50px;color:#eee !important; }
+.navbar-toggle{}
 .heading-desc{
     font-size:20px;
     font-weight:bold;
     padding:38px 38px 0px 38px;
     text-align:center;
-
 }
+body{background:#eee;}
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
     margin-bottom: 10px;
@@ -61,19 +38,6 @@
     margin-bottom: 10px;
     border-radius: 5px;
 }
-.login-footer{
-    background:#f0f0f0;
-    margin: 0 auto;
-    border-top: 1px solid #dadada;
-    padding:20px;
-}
-.login-footer .left-section a{
-    font-weight:bold;
-    color:#8a8a8a;
-    line-height:19px;
-}
-.mg-btm{
-    margin-bottom:10px;}
 
 .acceptto{margin-top:10px;}
 .acceptto-icon{
@@ -88,3 +52,6 @@
 .acceptto-panel a{
     color:green;
 }
+
+.table-parent{width:100%;}
+.table-parent td{width:50%;}
