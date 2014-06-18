@@ -9,6 +9,9 @@ $(function(){
         var password=$("#login-password");
         var msgW=$('.msg-warning');
         var msgS=$('.msg-success');
+        var loginform=$('#loginform');
+        var loginbtn = $('#btn-login');
+        var loginbox_title = $('#loginbox_title');
         var re =/[^@]+/
         user_name= re.exec(username.val());
 
@@ -16,11 +19,15 @@ $(function(){
         {
             msgW.show();
             msgS.hide();
+            loginform.show();
+            loginbtn.show();
         }
         else {
-            msgS.text(user_name + ' login successfully!');
+            msgS.text('Welcome ' + user_name + '!');
             msgS.show();
             msgW.hide();
+            loginform.hide();
+            loginbtn.hide();
         }
     });
 
