@@ -2,7 +2,6 @@
 <meta name="google-signin-scope" content="https://www.googleapis.com/auth/plus.login" />
 <meta name="google-signin-cookiepolicy" content="single_host_origin" />
 <meta name="google-signin-callback" content="signinCallback" />
-
 <script>
     // This is called with the results from from FB.getLoginStatus().
     function statusChangeCallback(response) {
@@ -28,7 +27,6 @@
             document.getElementById('fbLogin').style.display = 'block';
         }
     }
-
     // This function is called when someone finishes with the Login
     // Button. See the onlogin handler attached to it in the sample
     // code below.
@@ -37,7 +35,6 @@
             statusChangeCallback(response);
         });
     }
-
     window.fbAsyncInit = function() {
         FB.init({
             appId : '657108284383054',
@@ -62,7 +59,6 @@
             statusChangeCallback(response);
         });
     };
-
     // Load the SDK asynchronously
     (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -71,7 +67,6 @@
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
     // Here we run a very simple test of the Graph API after login is
     // successful. See statusChangeCallback() for when this call is made.
     function testAPI() {
@@ -82,7 +77,6 @@
                     'Thanks for logging in, ' + response.name + '!';
         });
     }
-
     function logout() {
         FB.logout(function(response) {
             document.getElementById('status').innerHTML = 'You signed out of facebook. ';
@@ -90,91 +84,126 @@
             document.getElementById('fbLogin').style.display = 'block';
         });
     }
-
     checkLoginState();
-</script>
 
-<div class="container">
-  <div class="row">
-      <h4 class="heading-desc">
+</script>
+<header class="navbar navbar-static-top navbar-default" role="banner">
+  <div class="container">
+      <a href="../" class="navbar-brand">
         Client 1 Business Website
-      </h4>
-      <div class="social-box">
-        <div class="row mg-btm">
-          <div class="col-md-6 col-md-offset-3">
-            <a href="#" class="btn btn-primary btn-block">
-              <i class="fa fa-facebook-square fa-3x"></i> Facebook Login Status
-            </a>
-            <div class="panel panel-info facebook-panel">
+      </a>
+    </div>
+</header>
+<div class="container" style="margin-top:50px;">
+  <div class="row">
+       <div class="col-md-6">
+         <div class="row">
+           <div class="col-md-12">
+             <a href="#" class="btn btn-primary btn-block">
+               <i class="fa fa-facebook-square" style="font-size:20px;"></i> Facebook Login Status
+             </a>
+             <div class="panel panel-info facebook-panel">
                <span id="status">...</span>
                <span id="facebook_logout" style='display:none;'>
                 <a onclick="javascript:logout()" href="#">
-                | Facebook Logout
+                  | Facebook Logout
                 </a>
                </span>
                <div id="fbLogin" style='display:none;'>
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                </fb:login-button>
+                 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+                 </fb:login-button>
                </div>
-              <script src="https://apis.google.com/js/client:plusone.js?onload=render"></script>
-            </div>
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-          <a href="#" class="btn btn-danger btn-block" >
-              <i class="fa fa-google-plus fa-3x"></i> Google+ Login Status
-          </a>
-          <div class="panel panel-danger google-panel">
+               <script src="https://apis.google.com/js/client:plusone.js?onload=render"></script>
+             </div>
+           </div>
+           <div class="col-md-12">
+             <a href="#" class="btn btn-danger btn-block" >
+               <i class="fa fa-google-plus " style="font-size:20px;"></i> Google+ Login Status
+             </a>
+             <div class="panel panel-danger google-panel">
             <span id="google_status">
             </span>
-            <div id='google_signed_in' style='display:none'>
-              <table>
-                <tr>
-                  <td>
-                    <span id='pic'></span>
-                  </td>
-                  <td>
-                    <span id='name'></span>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <br />
-            <br />
-            <button id="signinButton" style='display:none;'>Sign in with Google</button>
-            <button id="signoutButton" onclick='javascript:signOut();
-            ' style='display:none'>Sign out of Google</button>
+               <div id='google_signed_in' style='display:none'>
+                 <table>
+                   <tr>
+                     <td>
+                       <span id='pic'></span>
+                     </td>
+                     <td>
+                       <span id='name'></span>
+                     </td>
+                   </tr>
+                 </table>
+               </div>
+               <br />
+               <br />
+               <button id="signinButton" style='display:none;'>Sign in with Google</button>
+               <button id="signoutButton" onclick='javascript:signOut();
+               ' style='display:none'>Sign out of Google</button>
+             </div>
            </div>
-          </div>
-        </div>
-        <div class="row acceptto">
-          <div class="col-md-6 col-md-offset-3">
-            <a href="/login" class="btn btn-success btn-block" >
-              <img src="/images/icon.png" class="acceptto-icon" alt="" />  Acceptto Login Status
-            </a>
-            <div class="panel panel-success acceptto-panel" >
-              <% if @user.nil? %>
-                  <a href='/login' >
-                    Login Using Acceptto
-                  </a>
-              <% else %>
-                  Current Logged In User: <%= @user %> | <a href="/logout?service=<%= Rails.application.config.host_url %>">Sign Out</a>
-                  <br />
-                  <!--User Extra Attributes: <%= request.session['cas']['extra_attributes'] %>-->
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-     </div>
-    </div>
-    </div>
-
-
-
-
-
+           <div class="col-md-12">
+             <a href="/login" class="btn btn-success btn-block" >
+               <img src="/images/icon.png" class="acceptto-icon" alt="" />  Acceptto Login Status
+             </a>
+             <div class="panel panel-success acceptto-panel" >
+               <% if @user.nil? %>
+                   <a href='/login' >
+                     Login Using Acceptto
+                   </a>
+               <% else %>
+                   Current Logged In User: <%= @user %> | <a href="/logout?service=<%= Rails.application.config.host_url %>">Sign Out</a>
+                   <br />
+                   <!--User Extra Attributes: <%= request.session['cas']['extra_attributes'] %>-->
+               <% end %>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="col-md-6">
+         <div class="row">
+         <div id="loginbox" class="mainbox col-md-12">
+           <div class="panel panel-info">
+             <div class="panel-heading">
+               <div id='loginbox_title' class="panel-title">Local Account</div>
+             </div>
+             <div style="padding-top:30px" class="panel-body">
+               <div id='loginform'>
+	               <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+	               <div style="margin-bottom: 25px" class="input-group">
+	                 <span class="input-group-addon"><i class="fa  fa-user"></i></span>
+	                 <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">
+	               </div>
+	               <div style="margin-bottom: 25px" class="input-group">
+	                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+	                 <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+	               </div>
+	               <div class="input-group">
+	                 <div class="checkbox">
+	                   <label>
+	                     <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+	                   </label>
+	                 </div>
+	               </div>
+	           </div>
+               <div style="margin-top:10px" class="form-group">
+                 <!-- Button -->
+                 <div class="col-sm-12 controls" style="text-align:center;margin-bottom:10px;" >
+                   <a id="btn-login" href="#" class="btn btn-default" style="width:60%">Sign In</a>
+                 </div>
+                 <div class="alert alert-success msg-success" >
+                 </div>
+                 <div class="alert alert-danger msg-warning">
+                   Please enter username and password.
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         </div>
+       </div>
+  </div>
+</div>
 <script type="text/javascript">
     (function() {
         var po = document.createElement('script');
