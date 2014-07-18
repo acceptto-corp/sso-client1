@@ -9,6 +9,9 @@ class HomeController < ApplicationController
   end
   
   def login
+		unless params[:cas_failed].blank?
+			return redirect_to '/index'
+		end
     if request.session['cas'].nil? || request.session['cas']['user'].nil?
       return render :file => "#{Rails.root}/public/401.html", :status => 401, :layout => false
     else
