@@ -5,18 +5,18 @@ ruby '2.5.1'
 gem 'rails', '4.2.10'
 
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem "pg", "~> 0.18" 
 
 gem 'puma'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -28,12 +28,12 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 gem 'rack-cas'
 
-gem 'omniauth', '~> 1.2.1'
-gem 'omniauth-google-oauth2', '~> 0.2.4'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
 group :doc do
