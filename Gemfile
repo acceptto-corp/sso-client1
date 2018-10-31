@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.0.0'
+ruby '2.3.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1'
@@ -32,7 +32,7 @@ gem 'rack-cas'
 
 gem 'omniauth', '~> 1.2.1'
 gem 'omniauth-google-oauth2', '~> 0.2.4'
-gem 'omniauth-facebook', :branch => '1-6-stable'
+gem 'omniauth-facebook'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
