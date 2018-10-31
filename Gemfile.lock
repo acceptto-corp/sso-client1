@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/https://github.com/acceptto-corp/rack-cas.git
-  revision: de513d72431252f73a1de13f5695eb705d2fe220
+  revision: f902431e33a85b6500f29b4782d03e5c5e62bc2d
   branch: master
   specs:
     rack-cas (0.20.0)
