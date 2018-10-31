@@ -30,11 +30,8 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
-gem 'rack-cas'
-
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
+# bundle config local.rack-cas ~/Projects/rack-cas
+gem 'rack-cas', github: 'https://github.com/acceptto-corp/rack-cas', :branch => 'master'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

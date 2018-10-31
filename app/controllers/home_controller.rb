@@ -6,9 +6,16 @@ class HomeController < ApplicationController
     else
       @user = request.session['cas']['user']
     end
+    
+    @ticket = "#{request.session['cas']['ticket']}" rescue ''
   end
   
   def login
+    
+    p "****************************************************************"
+    p "Params: #{params}"
+    p "****************************************************************"
+    
 		unless params[:cas_failed].blank?
 			return redirect_to '/index'
 		end
