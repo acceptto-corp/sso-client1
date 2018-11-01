@@ -31,7 +31,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 
 # bundle config local.rack-cas ~/Projects/rack-cas
-gem 'rack-cas', github: 'https://github.com/acceptto-corp/rack-cas', :branch => 'master'
+gem 'rack-cas', github: 'acceptto-corp/rack-cas', :branch => 'master'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

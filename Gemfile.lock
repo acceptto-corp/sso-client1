@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/https://github.com/acceptto-corp/rack-cas.git
+  remote: git://github.com/acceptto-corp/rack-cas.git
   revision: f902431e33a85b6500f29b4782d03e5c5e62bc2d
   branch: master
   specs:
