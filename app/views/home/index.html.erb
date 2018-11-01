@@ -44,7 +44,7 @@
                 </a>
             <% else %>
                 Current Logged In User: <%= @user %> |
-                <a href="/logout?service=<%= Rails.application.config.host_url %>">Sign Out</a>
+                <a href='/logout?service=<%= "#{request.protocol + request.host_with_port}" %>'>Sign Out</a>
                 <br/>
                 <!--User Extra Attributes: <%= request.session['cas']['extra_attributes'] %>-->
             <% end %>
