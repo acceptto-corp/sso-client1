@@ -2,34 +2,26 @@ defaults: &defaults
   adapter: postgresql
   encoding: unicode
   pool: 5
+  host: <%= ENV['DB_HOST'] || 'localhost' %>
+  port: <%= ENV['DB_PORT'] || 5432 %>
+  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
+  password: <%= ENV['DB_PASSWORD'] || '' %>
 
 development:
   <<: *defaults
   database: sso_development
-  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DB_PASSWORD'] || '' %>
-  port: <%= ENV['DB_PORT'] || 5432 %>
 
 heroku-dev:
   <<: *defaults
   database: sso_development
-  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DB_PASSWORD'] || '' %>
-  port: <%= ENV['DB_PORT'] || 5432 %>
 
 staging:
   <<: *defaults
   database: sso_development
-  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DB_PASSWORD'] || '' %>
-  port: <%= ENV['DB_PORT'] || 5432 %>
 
 production:
   <<: *defaults
   database: sso_development
-  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DB_PASSWORD'] || '' %>
-  port: <%= ENV['DB_PORT'] || 5432 %>
 
 # warning: the database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -37,6 +29,3 @@ production:
 test:
   <<: *defaults
   database: sso_test
-  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DB_PASSWORD'] || '' %>
-  port: <%= ENV['DB_PORT'] || 5432 %>
