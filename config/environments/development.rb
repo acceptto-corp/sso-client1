@@ -27,7 +27,8 @@ AccepttoSsoClient::Application.configure do
   # number of complex assets.
   config.assets.debug = true
   
-  config.rack_cas.server_url = 'http://localhost:3002/cass/'
+  config.rack_cas.server_url = ENV["CAS_SERVER_URL"] || 'https://cas:8443/cas/'
+  config.rack_cas.verify_ssl_cert = ENV["CAS_VERIFY_SSL_CERT"] || false
   
   require 'rack-cas/session_store/active_record'
   config.rack_cas.session_store = RackCAS::ActiveRecordStore
